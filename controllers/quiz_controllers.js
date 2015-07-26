@@ -12,14 +12,29 @@ exports.load = function(req, res, next, quizId) {
   ).catch(function(error) { next(error);});
 };
 
+
 // GET /quizes
 exports.index = function(req, res) {
+
+  var busq = req.query.search;
+
+  if (busq){
+   models.Quiz.findAll({where: ["pregunta like ?", '%' + busq + '%'] , order: 'pregunta ASC'}).then(
+     function(quizes) {
+        res.render('quizes/index', { quizes: quizes});
+          }
+         ).catch(function(error) { next(error);})
+  } else {
   models.Quiz.findAll().then(
     function(quizes) {
       res.render('quizes/index', { quizes: quizes});
     }
   ).catch(function(error) { next(error);})
+
+  }
+
 };
+
 
 // GET /quizes/:id
 exports.show = function(req, res) {

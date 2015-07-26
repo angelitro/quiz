@@ -1,3 +1,5 @@
 node_modules
 public/quiz.sqlite
 .env
+npm-debug.log
+quiz.sqlite
