@@ -4,14 +4,15 @@ var router = express.Router();
 var quizController = require('../controllers/quiz_controllers')
 
 /* GET home page. */
+// Página de entrada (home page)
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Quiz' });
+  res.render('index', { title: 'Quiz', errors: []});
 });
 
 // Página del autor
 
 router.get('/author', function(req, res) {
-  res.render('author', { autor: 'Ángel' });
+  res.render('author', { autor: 'Ángel', errors: []});
 });
 
 // Autoload de comandos con :quizId
