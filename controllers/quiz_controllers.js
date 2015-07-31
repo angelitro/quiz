@@ -78,7 +78,7 @@ exports.create = function(req, res){
     res.render('quizes/new', {quiz: quiz, errors: errores});
   } else {
     quiz // save: guarda en DB campos pregunta y respuesta de quiz
-    .save({fields: ["pregunta", "respuesta"]})
+    .save({fields: ["pregunta", "respuesta", "tematica"]})
     .then( function(){ res.redirect('/quizes')}) ;
   }
 };
@@ -101,6 +101,7 @@ exports.update = function(req, res) {
   var quiz = models.Quiz.build( req.body.quiz ); // BD
   req.quiz.pregunta  = req.body.quiz.pregunta;
   req.quiz.respuesta = req.body.quiz.respuesta;
+  req.quiz.tematica = req.body.quiz.tematica;
 
   var errors = quiz.validate();//ya qe el objeto errors no tiene then(
   if (errors)
@@ -110,7 +111,7 @@ exports.update = function(req, res) {
     res.render('quizes/edit', {quiz: quiz2, errors: errores});
   } else {
 	req.quiz     // save: guarda campos pregunta y respuesta en DB
-        .save( {fields: ["pregunta", "respuesta"]})
+        .save( {fields: ["pregunta", "respuesta", "tematica"]})
         .then( function(){ res.redirect('/quizes');});
   }
 
