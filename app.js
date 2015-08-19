@@ -44,7 +44,26 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', routes);
+
+
+app.use('/', function(req, res, next) {
+
+	var tiempo = 120000;
+
+	if (req.session.user) {
+
+		req.session.cookie.expires = new Date(Date.now() + tiempo);
+
+		next();
+
+
+	} else {
+
+		next();
+	}
+
+}, routes);
+
 //app.use('/users', users);
 
 // catch 404 and forward to error handler
